@@ -1,0 +1,129 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+
+    <table class="table table-hover">
+        <tr>
+            <td width="70px">
+                <a href="{{ url_for('main.user', username=post.author.username) }}">
+                    <img src="{{ post.author.avatar(70) }}" />
+                </a>
+            </td>
+            <td>
+                {% set user_link %}
+                    <span class="user_popup">
+                        <a href="{{ url_for('main.user', username=post.author.username) }}">
+                            {{ post.author.username }}
+                        </a>
+                    </span>
+                {% endset %}
+                {{ _('%(username)s : %(when)s',
+                    username=user_link, when=moment(post.timestamp).fromNow()) }}
+                <br>
+                {% if post.type == 'startshift' %}
+                    <span><b>Start of Shift</b></span>
+                    <br>
+                {% endif %}
+                {% if post.type == 'endshift' %}
+                    <span><b>End of Shift</b></span>
+                    <br>
+                {% endif %}
+                {% if post.type == 'post' %}
+                    <span><b>New Logbook Post</b></span>
+                    <br>
+                {% endif %}
+                {% if post.type == 'freezer' %}
+                    <span><b>Freezer Access</b></span>
+                    <br>
+                {% endif %}
+                {% if post.type == 'checklist' %}
+                    <span><b>Shifter Checklist</b></span>
+                    <br>
+                {% endif %}
+                {% if post.type == 'startrun' %}
+                    <span><b>Start New Run</b></span>
+                    <br>
+                {% endif %}
+                Logbook Post ID: <span id="post{{ post.id }}">{{ post.id }}</span>
+                <br>
+                {% if post.run_id %}
+                    FAT Run ID: <span id ="post{{ post.run_id }}">{{ post.run_id }}</span>
+                    <br>
+                {% endif %}
+                {% if post.module_id %}
+                    Module ID: <span id="post{{ post.module_id }}">{{ post.module_id }}</span>
+                    <br>
+                {% endif %}
+                {% if post.sw_hw != None and post.sw_hw != 'N/A' %}
+                    Hardware or Software Issue: <span id="post{{ post.sw_hw }}">{{ post.sw_hw }}</span>
+                    <br>
+                {% endif %}
+                {% if post.running %}
+                    Master Script is Running: <span id="post{{ post.running }}">{{ post.running }}</span>
+                    <br>
+                {% endif %}
+                {% if post.slack %}
+                    Slack Bot is Posting: <span id="post{{ post.slack }}">{{ post.slack }}</span>
+                    <br>
+                {% endif %}
+                {% if post.temperature %}
+                    Temperature Range OK: <span id="post{{ post.temperature }}">{{ post.temperature }}</span>
+                    <br>
+                {% endif %}
+                {% if post.function_gen %}
+                  Function Generator is On: <span id="post{{ post.function_gen }}">{{ post.function_gen}}</span>
+                  <br>
+                {% endif %}
+                {% if post.laser %}
+                    Laser is On: <span id="post{{ post.laser }}">{{ post.laser }}</span>
+                    <br>
+                {% endif %}
+                {% if post.thermos %}
+                    Thermometers are On: <span id="post{{ post.thermos }}">{{ post.thermos }}</span>
+                    <br>
+                {% endif %}
+                {% if post.humidity %}
+                    Humidity Sensors are On: <span id="post{{ post.humidity }}">{{ post.humidity }}</span>
+                    <br>
+                {% endif %}
+                {% if post.fw_wheel %}
+                    Filter Wheel Connected: <span id="post{{ post.fw_wheel }}">{{ post.fw_wheel }}</span>
+                    <br>
+                {% endif %}
+                {% if post.setup %}
+                    D-Eggs Setup: <span id="post{{ post.setup }}">{{ post.setup }}</span>
+                    <br>
+                {% endif %}
+                {% if post.flash %}
+                    D-Egg FPGAs Flashed: <span id="post{{ post.flash }}">{{ post.flash }}</span>
+                    <br>
+                {% endif %}
+                {% if post.configs %}
+                    Configuration File Created: <span id="post{{ post.configs }}">{{ post.configs }}</span>
+                    <br>
+                {% endif %}
+                {% if post.hv %}
+                    High Voltage Disabled: <span id="post{{ post.hv }}">{{ post.hv }}</span>
+                    <br>
+                {% endif %}
+                {% if post.freezer_temp_s and post.freezer_temp_e %}
+                    Freezer Temperature (Start): <span id="post{{ post.freezer_temp_s }}">{{ post.freezer_temp_s }}</span>
+                    <br>
+                    Freezer Temperature (End): <span id="post{{ post.freezer_temp_e }}">{{ post.freezer_temp_e }}</span>
+                    <br>
+                {% endif %}
+                {% if post.freezer_hum_s and post.freezer_hum_e %}
+                    Freezer Humidity (Start): <span id="post{{ post.freezer_hum_s }}">{{ post.freezer_hum_s }}</span>
+                    <br>
+                    Freezer Humidity (End): <span id="post{{ post.freezer_hum_e }}">{{ post.freezer_hum_e }}</span>
+                    <br>
+                {% endif %}
+                {% if post.start and post.end %}
+                    Access Start: <span id="post{{ post.start }}">{{ post.start }}</span>
+                    <br>
+                    Access  End: <span id="post{{ post.end }}">{{ post.end }}</span>
+                    <br>
+                {% endif %}
+                Comment: <span id="post{{ post.body }}">{{ post.body }}</span>
+                <br><br>
+            </td>
+        </tr>
+    </table>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    {% if current_user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-4">
+        <li><a href="{{ url_for('main.start_shift') }}">{{ ('Start Shift') }}</a></li>
+        <li><a href="{{ url_for('main.end_shift') }}">{{ ('End Shift') }}</a></li>
+        <li><a href="{{ url_for('main.start_run') }}">{{ ('Start New Run') }}</a></li>
+        <li><a href="{{ url_for('main.checklist') }}">{{ ('Shifter Checklist') }}</a></li>
+        <li><a href="{{ url_for('main.freezer_form') }}">{{ ('Freezer Access Form') }}</a></li>
+        <li><a href="{{ url_for('main.new_post') }}">{{ ('New Logbook Entry') }}</a></li>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
